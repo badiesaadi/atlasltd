@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="styles_admin.css">
+  <!-- Add Chart.js for bar chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>  
+  <div class="container">
+    <div id="login-section" class="card">
+      <h1>Admin Dashboard</h1>
+      <div id="toast" class="toast"></div>
+      <div style="margin-top: 20px;">
+        <input type="email" id="admin-email" placeholder="Admin Email" required />
+        <input type="password" id="admin-password" placeholder="Password" required />
+        <button id="login-btn">Login</button>
+        <p id="login-status"></p>
+      </div>
+    </div>
+
+    <div id="dashboard" style="display: none;">
+      <header>
+        <h1>Admin Dashboard</h1>
+        <button id="logout-btn">Logout</button>
+      </header>
+
+      <!-- KPI Cards -->
+      <div class="kpi-cards">
+        <div class="kpi-card">
+          <h3>Total Inquiries</h3>
+          <p id="total-inquiries">0</p>
+        </div>
+        <div class="kpi-card">
+          <h3>By Transportation</h3>
+          <p id="transport-stats">Air: 0%, Freight: 0%, Road: 0%</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Average Weight (KG)</h3>
+          <p id="avg-weight">0</p>
+        </div>
+      </div>
+
+      <!-- Bar Chart -->
+      <div class="card">
+        <h2>Inquiries Over Time</h2>
+        <canvas id="inquiries-chart" height="100"></canvas>
+      </div>
+
+      <div class="card">
+        <div class="dashboard-header">
+          <h2>Received Messages</h2>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="search-filter">
+          <input type="text" id="search-bar" placeholder="Search by name, email, or city..." aria-label="Search inquiries">
+          <select id="transport-filter" aria-label="Filter by transportation mode">
+            <option value="">All Transportation Modes</option>
+            <option value="freight">Freight</option>
+            <option value="air">Air</option>
+            <option value="road">Road</option>
+          </select>
+          <button id="export-csv">Export to CSV</button>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th data-sort="name">Name</th>
+                <th data-sort="email">Email</th>
+                <th data-sort="phone">Phone</th>
+                <th data-sort="weight">Weight</th>
+                <th data-sort="departure">From</th>
+                <th data-sort="delivery">To</th>
+                <th data-sort="transportation">Transport</th>
+                <th data-sort="message">Message</th>
+                <th data-sort="timestamp">Time</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="messages-body">
+              <!-- Messages will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div id="message-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">×</span>
+        <h2>Message Details</h2>
+        <div class="modal-body">
+          <div class="detail-row">
+            <div class="detail-label">Name:</div>
+            <div id="modal-name" class="detail-value"></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Email:</div>
+            <div id="modal-email" class="detail-value"></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Phone:</div>
+            <div id="modal-phone" class="detail-value"></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Weight:</div>
+            <div id="modal-weight" class="detail-value"></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">From:</div>
+            <div id="modal-departure" class="detail-value"></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">To:</div>
+            <div id="modal-delivery" class="detail-value"></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Transport:</div>
+            <div id="modal-transportation" class="detail-value"></div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-label">Time:</div>
+            <div id="modal-timestamp" class="detail-value"></div>
+          </div>
+          <div class="detail-row message-row">
+            <div class="detail-label">Message:</div>
+            <div id="modal-message" class="detail-value"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

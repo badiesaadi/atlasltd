@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Atlas Freight Connect Ltd</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div id="top"></div>
+
+    <header>
+        <nav>
+            <a class="logo" href="index.html">Atlas Freight Connect Ltd</a>
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#services">Services</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/pages/air-freight.html">Air Freight</a></li>
+                        <li><a href="/pages/sea-freight.html">Sea Freight</a></li>
+                        <li><a href="/pages/road-transport.html">Road Transportation</a></li>
+                    </ul>
+                </li>
+                <li><a href="#about">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">☰</div>
+        </nav>
+    </header>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Your Trusted UK Shipping Partner</h1>
+            <p>Connecting businesses worldwide with reliable freight solutions</p>
+            <a href="/pages/contact.html" class="cta-button">Get a Quote</a>
+        </div>
+    </section>
+
+    <main>
+        <section id="contact" class="contact">
+            <h2>Contact Us</h2>
+            <div class="contact-container">
+                <form id="contact-form">
+                    <input type="text" name="name" placeholder="Your Name" required autocomplete="name" aria-label="Your Name">
+                    <input type="email" name="email" placeholder="Your Email" required autocomplete="email" aria-label="Your Email">
+                    <input type="tel" name="phone" placeholder="Phone Number" pattern="^\+?[0-9\s]{7,20}$" aria-label="Phone Number">
+                    <input 
+                        type="text" 
+                        name="weight" 
+                        placeholder="Gross weights (KG, e.g., 123.45 or 123.45 678)" 
+                        aria-label="Gross weights in kilograms" 
+                        required 
+                        title="Enter one or more numbers with up to 2 decimal places, separated by spaces (e.g., 123.45 or 123.45 678)"
+                    >
+                    <input type="text" name="departure" placeholder="City of departure" required autocomplete="address-level2" aria-label="City of departure">
+                    <input type="text" name="delivery" placeholder="Delivery city" required autocomplete="address-level2" aria-label="Delivery city">
+                    <div class="form-group">
+                        <label for="transportation">Preferred Transportation:</label>
+                        <select name="transportation" id="transportation" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="freight">Freight</option>
+                            <option value="air">Air</option>
+                            <option value="road">Road</option>
+                        </select>
+                    </div>
+                    <textarea name="message" placeholder="Your Message" maxlength="400" required aria-label="Your Message"></textarea>
+                    <button type="submit">Send Message</button>
+                    <p id="form-status"></p>
+                </form>
+
+                <script type="module">
+                    // Import Supabase functions from the CDN
+                    import { createClient } from 'https://esm.sh/@supabase/supabase-js';
+
+                    // Supabase configuration
+                    const supabaseUrl = 'https://ilinrjsoxjedgqhryvwy.supabase.co';
+                    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsaW5yanNveGplZGdxaHJ5dnd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3OTQyNzMsImV4cCI6MjA2MDM3MDI3M30.YZRTgSGK6L_rJPYqPKcawT7KlR5c9MRMj6fyHIHmzOc';
+                    const supabase = createClient(supabaseUrl, supabaseKey);
+
+                    console.log("Supabase initialized");
+
+                    const form = document.getElementById("contact-form");
+                    const formStatus = document.getElementById("form-status");
+
+                    form.addEventListener("submit", async (event) => {
+                        event.preventDefault();
+                        formStatus.textContent = "Submitting...";
+                        formStatus.style.color = "blue";
+
+                        // Reset custom invalid styling
+                        const weightInput = form.querySelector('input[name="weight"]');
+                        weightInput.classList.remove('custom-invalid');
+
+                        try {
+                            const formData = new FormData(form);
+                            const data = {
+                                name: formData.get("name")?.trim() || "",
+                                email: formData.get("email")?.trim() || "",
+                                phone: formData.get("phone")?.trim() || "Not provided",
+                                weight: formData.get("weight")?.trim() || "Not provided",
+                                departure: formData.get("departure")?.trim() || "",
+                                delivery: formData.get("delivery")?.trim() || "",
+                                transportation: formData.get("transportation") || "",
+                                message: formData.get("message")?.trim() || "",
+                                timestamp: new Date().toISOString()
+                            };
+
+                            // Validation
+                            if (!data.name || data.name.length > 100) {
+                                formStatus.textContent = "Name must be between 1 and 100 characters.";
+                                formStatus.style.color = "red";
+                                return;
+                            }
+                            if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(data.email)) {
+                                formStatus.textContent = "Invalid email address.";
+                                formStatus.style.color = "red";
+                                return;
+                            }
+                            if (data.phone !== "Not provided" && !/^\+?[0-9\s]{7,20}$/.test(data.phone)) {
+                                formStatus.textContent = "Phone must be 7–20 digits, optional +.";
+                                formStatus.style.color = "red";
+                                return;
+                            }
+                            if (data.weight !== "Not provided" && !/^(?:[0-9]+(\.[0-9]{1,2})?\s*)+$/.test(data.weight)) {
+                                formStatus.textContent = "Weight must be one or more numbers with up to 2 decimal places, separated by spaces (e.g., 123.45 or 123.45 678).";
+                                formStatus.style.color = "red";
+                                weightInput.classList.add('custom-invalid');
+                                return;
+                            }
+                            if (!data.departure || data.departure.length > 70) {
+                                formStatus.textContent = "Departure city is required (max 70 chars).";
+                                formStatus.style.color = "red";
+                                return;
+                            }
+                            if (!data.delivery || data.delivery.length > 70) {
+                                formStatus.textContent = "Delivery city is required (max 70 chars).";
+                                formStatus.style.color = "red";
+                                return;
+                            }
+                            if (!["freight", "air", "road"].includes(data.transportation)) {
+                                formStatus.textContent = "Select a valid transportation method.";
+                                formStatus.style.color = "red";
+                                return;
+                            }
+                            if (!data.message || data.message.length > 400) {
+                                formStatus.textContent = "Message must be between 1 and 400 characters.";
+                                formStatus.style.color = "red";
+                                return;
+                            }
+
+                            // Submit to Supabase
+                            const { error } = await supabase.from('messages').insert([data]);
+
+                            if (error) {
+                                throw error;
+                            }
+
+                            // Success feedback
+                            formStatus.textContent = "Message sent successfully!";
+                            formStatus.style.color = "green";
+                            form.reset();
+
+                        } catch (error) {
+                            console.error("Form submission error:", error);
+                            formStatus.textContent = "Error submitting form: " + error.message;
+                            formStatus.style.color = "red";
+                        }
+                    });
+                </script>
+
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>📍 Access Self Storage Hayes<br>
+                       Address: Atlas Freight Connect LTD,<br>
+                       1 Nestles Ave, Hayes UB3 4UZ</p>
+                    <p>📞 +44 20 3609 3344</p>
+                    <p>✉️ info@atlasfreightconnect.co.uk</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d79474.96709516265!2d-0.421173!3d51.502341!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876728843571b11%3A0xa0b79cd03a2bfc72!2sAtlas%20Freight%20Connect!5e0!3m2!1sen!2sus!4v1743470706986!5m2!1sen!2sus" 
+            style="border:0;" 
+            allowfullscreen 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+
+    <footer>
+        <div class="footer-content">   
+            <div class="footer-section">
+                <h4>Atlas Freight Connect Ltd</h4>
+                <p>Your trusted shipping partner in the UK</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Working Hours</h4>
+                <p>Monday - Friday: 9:00 - 18:00</p>
+                <p>Saturday: 10:00 - 14:00</p>
+                <p>Sunday: Closed</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Atlas Freight Connect Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="top-bar">
+        <span>Call Free: +44 020 3609 3344</span>
+        <span>info@atlasfreightconnect.co.uk</span>
+        <span>Mon - Sat: 9AM - 4PM</span>
+        <div class="social-media">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
