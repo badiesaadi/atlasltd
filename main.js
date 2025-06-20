@@ -193,46 +193,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Form submission with async fetch
-    if (contactForm) {
-        contactForm.addEventListener('submit', async function (e) {
-            e.preventDefault(); // Prevent default form submission and page reload
+   if (contactForm) {
+    contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-            const form = e.target;
-            const formData = new FormData(form);
-            const submitButton = form.querySelector('button');
+        const form = e.target;
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button');
+        const statusMessage = document.getElementById('form-status');
 
-            // Show a loading state
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
 
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
+        try {
+            const { createClient } = Supabase;
+            const supabase = createClient(window.env.SUPABASE_URL, window.env.SUPABASE_ANON_KEY);
 
-                if (response.ok) {
-                    statusMessage.textContent = 'Message sent successfully!';
-                    statusMessage.style.color = 'green';
-                    form.reset(); // Clear the form fields
-                } else {
-                    statusMessage.textContent = 'Error sending message. Please try again.';
-                    statusMessage.style.color = 'red';
-                }
-            } catch (error) {
-                statusMessage.textContent = 'Error sending message. Please try again.';
-                statusMessage.style.color = 'red';
+            const name = DOMPurify.sanitize(formData.get('name')?.trim() || '');
+            const email = DOMPurify.sanitize(formData.get('email')?.trim() || '');
+            const message = DOMPurify.sanitize(formData.get('message')?.trim() || '');
+
+            if (!/^[a-zA-Z\s]+$/.test(name) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || message.length < 2) {
+                throw new Error('Invalid input data');
             }
 
-            // Reset button state after 3 seconds
-            setTimeout(() => {
-                submitButton.textContent = 'Send Message';
-                submitButton.disabled = false;
-                statusMessage.textContent = '';
-            }, 3000);
-        });
-    }
+            const { error } = await supabase.from('contacts').insert({
+                name,
+                email,
+                message,
+                created_at: new Date().toISOString()
+            });
+
+            if (error) throw error;
+
+            statusMessage.textContent = 'Message sent successfully!';
+            statusMessage.style.color = 'green';
+            form.reset();
+        } catch (error) {
+            statusMessage.textContent = `Error sending message: ${error.message}. Please try again.`;
+            statusMessage.style.color = 'red';
+        }
+
+        setTimeout(() => {
+            submitButton.textContent = 'Send Message';
+            submitButton.disabled = false;
+            statusMessage.textContent = '';
+        }, 3000);
+    });
+}
 
     // ==========================================================================
     // Animations

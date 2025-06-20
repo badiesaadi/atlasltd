@@ -76,7 +76,9 @@
 
                     // Supabase configuration
                     const supabaseUrl = 'https://ilinrjsoxjedgqhryvwy.supabase.co';
-                    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsaW5yanNveGplZGdxaHJ5dnd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3OTQyNzMsImV4cCI6MjA2MDM3MDI3M30.YZRTgSGK6L_rJPYqPKcawT7KlR5c9MRMj6fyHIHmzOc';
+                    // Fix: Define supabaseKey (replace with your actual Anon Key)
+                    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsaW5yanNveGplZGdxaHJ5dnd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3OTQyNzMsImV4cCI6MjA2MDM3MDI3M30.YZRTgSGK6L_rJPYqPKcawT7KlR5c9MRMj6fyHIHmzOc'; // Add your actual key here
+                    
                     const supabase = createClient(supabaseUrl, supabaseKey);
 
                     console.log("Supabase initialized");
@@ -240,5 +242,7 @@
 
     
     <script src="main.js"></script>
+    <script src="env.js"></script>
+  
 </body>
 </html>

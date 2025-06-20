@@ -1,0 +1,2 @@
+// pages/env-loader.js
+window.supabaseKey = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsaW5yanNveGplZGdxaHJ5dnd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3OTQyNzMsImV4cCI6MjA2MDM3MDI3M30.YZRTgSGK6L_rJPYqPKcawT7KlR5c9MRMj6fyHIHmzOc'; // Fallback for local testing
