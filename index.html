@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reliable UK freight solutions by Atlas Freight Connect Ltd. Air, sea, road transport, customs clearance, and global shipping. Get a quote today!">
     <title>Atlas Freight Connect Ltd - UK Shipping Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div id="app"></div>
     <div id="top"></div>
 
     <header>
@@ -22,6 +24,9 @@
         <li><a href="/pages/air-freight.html">Air Freight</a></li>
         <li><a href="/pages/sea-freight.html">Sea Freight</a></li>
         <li><a href="/pages/road-transport.html">Road Transportation</a></li>
+        <li><a href="/pages/customs-clearance.html">Customs Clearance</a></li>
+        <li><a href="/pages/collection-delivery.html">Collection & Delivery</a></li>
+        <li><a href="/pages/excess-baggage.html">Excess Baggage</a></li>
     </ul>
 </li>
                 <li><a href="#about">About</a></li>
@@ -31,7 +36,7 @@
         </nav>
     </header>
 
-    <main>
+    
         <section id="home" class="hero">
             <div class="hero-content">
                 <h1>Your Trusted UK Shipping Partner</h1>
@@ -54,12 +59,74 @@
                     <p>Fast and reliable air cargo services</p>
                 </a>
                 <a href="./pages/road-transport.html" class="service-card" aria-label="Learn more about Road Transport">
-                    <img src="/road-transportation.avif" alt="Road Transport">
+                    <img src="https://www.ems-cargo.co.uk/wp-content/uploads/2019/07/Road-Freight-Road-Haulage-Company-UK.jpg" alt="Road Transport">
                     <h3>Road Transport</h3>
                     <p>Comprehensive UK and European road freight</p>
                 </a>
+                <a href="./pages/customs-clearance.html" class="service-card" aria-label="Learn more about Customs Clearance">
+                    <img src="https://images.pexels.com/photos/7691687/pexels-photo-7691687.jpeg" alt="Customs Clearance">
+                    <h3>Customs Clearance</h3>
+                    <p>Expert customs clearance and compliance services</p>
+                </a>
+                <a href="./pages/collection-delivery.html" class="service-card" aria-label="Learn more about Collection & Delivery">
+                    <img src="https://images.pexels.com/photos/4393426/pexels-photo-4393426.jpeg" alt="Collection & Delivery">
+                    <h3>Collection & Delivery</h3>
+                    <p>Door-to-door collection and delivery solutions</p>
+                </a>
+                <a href="./pages/excess-baggage.html" class="service-card" aria-label="Learn more about Excess Baggage">
+                    <img src="https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg" alt="Excess Baggage">
+                    <h3>Excess Baggage</h3>
+                    <p>Cost-effective excess baggage shipping worldwide</p>
+                </a>
             </div>
         </section>
+
+        <h2>Effortless shipping solutions tailored for your eCommerce business</h2>
+
+        <p style="text-align: center;">Streamline your shipping: import orders and book deliveries with your Transglobal account, or connect our shipping solutions to your store.</p>
+
+        <section class="smart-shipping">
+            <div class="sm-div">
+                <img src="/smart shipping/ebay.png"  alt="ebay logo" >
+                <button>Learn more</button>
+            </div>
+             <div class="sm-div">
+                <img src="/smart shipping/shopify.png"  alt="shopify logo" >
+                <button>Learn more</button>
+            </div>
+
+
+
+        </section>
+
+        <section class="currency-converter">
+    <h2>Currency Converter</h2>
+    <p>Estimate shipping costs in your preferred currency</p>
+    <div class="converter-form">
+        <input type="number" id="amount" placeholder="Enter amount" min="0" step="0.01">
+        <select id="from-currency">
+            <option value="GBP" selected>GBP - British Pound</option>
+            <option value="AUD">AUD - Australian Dollar</option>
+            <option value="USD">USD - US Dollar</option>
+            <option value="CNY">CNY - Chinese Yuan</option>
+            <option value="INR">INR - Indian Rupee</option>
+            <option value="AED">AED - UAE Dirham</option>
+            <option value="HKD">HKD - Hong Kong Dollar</option>
+        </select>
+        <span>to</span>
+        <select id="to-currency">
+            <option value="GBP">GBP - British Pound</option>
+            <option value="AUD" selected>AUD - Australian Dollar</option>
+            <option value="USD">USD - US Dollar</option>
+            <option value="CNY">CNY - Chinese Yuan</option>
+            <option value="INR">INR - Indian Rupee</option>
+            <option value="AED">AED - UAE Dirham</option>
+            <option value="HKD">HKD - Hong Kong Dollar</option>
+        </select>
+        <button id="convert-button">Convert</button>
+    </div>
+    <p id="result" class="result"></p>
+</section>
 
         <section id="about" class="about">
             <h2>About Us</h2>
@@ -88,39 +155,50 @@
             referrerpolicy="no-referrer-when-downgrade">
         </iframe>
     </div>
-
-    <div class="image-slider">
+ <div class="image-slider">
         <div class="slider-track">
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3" alt="Container Ship">
+                <img src="https://images.unsplash.com/photo-1717484308917-7206da019d16?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHFhdGFyJTIwYWlyd2F5c3xlbnwwfHwwfHx8MA%3D%3D" alt="Qatar Airways">
             </div>
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1577287473566-3b437bd5fd0c" alt="Logistics Warehouse">
+                <img src="https://images.unsplash.com/photo-1615558568469-de10704d9102?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YnJpdGlzaCUyMGFpcndheXN8ZW58MHx8MHx8fDA%3D" alt="British Airways">
             </div>
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d" alt="Cargo Plane">
+                <img src="https://media.cntraveller.com/photos/663e15603e519f973943733f/16:9/w_2560%2Cc_limit/Etihad%2520Airways_GettyImages-1779070970.jpg" alt="Etihad Airways">
             </div>
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1586528116493-9f21faeb7c99" alt="Truck Transport">
+                <img src="https://www.stattimes.com/h-upload/2022/07/06/27345-dhl-aviation-bahrain-starts-6-weekly-freighter-flights-to-delhi.webp" alt="DHL Aviation">
             </div>
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec" alt="Port Operations">
+                <img src="https://fedex-dims.brightspotgocdn.com/dims4/default/4f55de5/2147483647/strip/true/crop/848x477+0+44/resize/1000x563!/quality/90/?url=https%3A%2F%2Ffedex-static.brightspotgocdn.com%2F2d%2Fca%2F9fa1ffc442daa3f0f44465a87533%2Fpicture1.jpg" alt="FedEx Airways">
+            </div>
+            <div class="slide">
+                <img src="https://static.routesonline.com/images/cached/newsarticle-299663148-cropped-300x200.jpg" alt="Royal Jordanian">
+            </div>
+            <div class="slide">
+                <img src="https://images.squarespace-cdn.com/content/v1/6302e2dc375ece360b8e4e73/1689137691584-2FTEUQWORMQDPAM9A620/airfrance787.PNG" alt="Air France">
             </div>
             <!-- Duplicate slides for seamless loop -->
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3" alt="Container Ship">
+                <img src="https://images.unsplash.com/photo-1717484308917-7206da019d16?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHFhdGFyJTIwYWlyd2F5c3xlbnwwfHwwfHx8MA%3D%3D" alt="Qatar Airways">
             </div>
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1577287473566-3b437bd5fd0c" alt="Logistics Warehouse">
+                <img src="https://images.unsplash.com/photo-1615558568469-de10704d9102?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YnJpdGlzaCUyMGFpcndheXN8ZW58MHx8MHx8fDA%3D" alt="British Airways">
             </div>
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d" alt="Cargo Plane">
+                <img src="https://media.cntraveller.com/photos/663e15603e519f973943733f/16:9/w_2560%2Cc_limit/Etihad%2520Airways_GettyImages-1779070970.jpg" alt="Etihad Airways">
             </div>
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1586528116493-9f21faeb7c99" alt="Truck Transport">
+                <img src="https://www.stattimes.com/h-upload/2022/07/06/27345-dhl-aviation-bahrain-starts-6-weekly-freighter-flights-to-delhi.webp" alt="DHL Aviation">
             </div>
             <div class="slide">
-                <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec" alt="Port Operations">
+                <img src="https://fedex-dims.brightspotgocdn.com/dims4/default/4f55de5/2147483647/strip/true/crop/848x477+0+44/resize/1000x563!/quality/90/?url=https%3A%2F%2Ffedex-static.brightspotgocdn.com%2F2d%2Fca%2F9fa1ffc442daa3f0f44465a87533%2Fpicture1.jpg" alt="FedEx Airways">
+            </div>
+            <div class="slide">
+                <img src="https://static.routesonline.com/images/cached/newsarticle-299663148-cropped-300x200.jpg" alt="Royal Jordanian">
+            </div>
+            <div class="slide">
+                <img src="https://images.squarespace-cdn.com/content/v1/6302e2dc375ece360b8e4e73/1689137691584-2FTEUQWORMQDPAM9A620/airfrance787.PNG" alt="Air France">
             </div>
         </div>
     </div>
@@ -143,11 +221,23 @@
     </section>
 
     <footer>
+
+        
         <div class="footer-content">   
             <div class="footer-section">
                 <h4>Atlas Freight Connect Ltd</h4>
                 <p>Your trusted shipping partner in the UK</p>
             </div>
+             <div class="footer-section">
+                <h4>Services</h4>
+               <li><a href="/pages/air-freight.html">Air Freight</a></li>
+               <li><a href="/pages/sea-freight.html">Sea Freight</a></li>
+               <li><a href="/pages/road-transport.html">Road Transportation</a></li>
+               <li><a href="/pages/customs-clearance.html">Customs Clearance</a></li>
+               <li><a href="/pages/collection-delivery.html">Collection & Delivery</a></li>
+               <li><a href="/pages/excess-baggage.html">Excess Baggage</a></li>
+            </div>
+
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <ul>
@@ -155,6 +245,13 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="/pages/contact.html">Contact</a></li>
                 </ul>
+            <div class="footer-section">
+                <h4>Terms of use </h4>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </div>
+
+           
             </div>
             <div class="footer-section">
                 <h4>Working Hours</h4>
@@ -165,7 +262,12 @@
         </div>
         <div class="footer-bottom">
             <p>© 2025 Atlas Freight Connect Ltd. All rights reserved.</p>
+             <a href="#" target="_blank" aria-label="Mastercard Payment">
+        <img src="/site pics/mastercardlogo.png" alt="Mastercard Logo" style="width: 90px; height: 60px;">
+             </a>
         </div>
+
+        
     </footer>
 
     <div class="top-bar">
@@ -188,6 +290,6 @@
         </div>
     </div>
 
-    <script src="  main.js "></script>
+    <script src="main.js" type="module"></script>
 </body>
 </html>
