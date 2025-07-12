@@ -74,106 +74,106 @@
                 </form>
 
                 <script type="module">
-                    // Import Supabase functions from the CDN
-                    import { createClient } from 'https://esm.sh/@supabase/supabase-js';
+    // Import Supabase functions from the CDN
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js';
 
-                    // Supabase configuration
-                    const supabaseUrl = 'https://ilinrjsoxjedgqhryvwy.supabase.co';
-                    // Fix: Define supabaseKey (replace with your actual Anon Key)
-                    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsaW5yanNveGplZGdxaHJ5dnd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3OTQyNzMsImV4cCI6MjA2MDM3MDI3M30.YZRTgSGK6L_rJPYqPKcawT7KlR5c9MRMj6fyHIHmzOc'; // Add your actual key here
-                    
-                    const supabase = createClient(supabaseUrl, supabaseKey);
+    // Supabase configuration
+    const supabaseUrl = 'https://ilinrjsoxjedgqhryvwy.supabase.co';
+    // Fix: Define supabaseKey (replace with your actual Anon Key)
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsaW5yanNveGplZGdxaHJ5dnd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3OTQyNzMsImV4cCI6MjA2MDM3MDI3M30.YZRTgSGK6L_rJPYqPKcawT7KlR5c9MRMj6fyHIHmzOc'; // Add your actual key here
+    
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
-                    console.log("Supabase initialized");
+    console.log("Supabase initialized");
 
-                    const form = document.getElementById("contact-form");
-                    const formStatus = document.getElementById("form-status");
+    const form = document.getElementById("contact-form");
+    const formStatus = document.getElementById("form-status");
 
-                    form.addEventListener("submit", async (event) => {
-                        event.preventDefault();
-                        formStatus.textContent = "Submitting...";
-                        formStatus.style.color = "blue";
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        formStatus.textContent = "Submitting...";
+        formStatus.style.color = "blue";
 
-                        // Reset custom invalid styling
-                        const weightInput = form.querySelector('input[name="weight"]');
-                        weightInput.classList.remove('custom-invalid');
+        // Reset custom invalid styling
+        const weightInput = form.querySelector('input[name="weight"]');
+        weightInput.classList.remove('custom-invalid');
 
-                        try {
-                            const formData = new FormData(form);
-                            const data = {
-                                name: formData.get("name")?.trim() || "",
-                                email: formData.get("email")?.trim() || "",
-                                phone: formData.get("phone")?.trim() || "Not provided",
-                                weight: formData.get("weight")?.trim() || "Not provided",
-                                departure: formData.get("departure")?.trim() || "",
-                                delivery: formData.get("delivery")?.trim() || "",
-                                transportation: formData.get("transportation") || "",
-                                message: formData.get("message")?.trim() || "",
-                                timestamp: new Date().toISOString()
-                            };
+        try {
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get("name")?.trim() || "",
+                email: formData.get("email")?.trim() || "",
+                phone: formData.get("phone")?.trim() || "Not provided",
+                weight: formData.get("weight")?.trim() || "Not provided",
+                departure: formData.get("departure")?.trim() || "",
+                delivery: formData.get("delivery")?.trim() || "",
+                transportation: formData.get("transportation") || "",
+                message: formData.get("message")?.trim() || "",
+                timestamp: new Date().toISOString()
+            };
 
-                            // Validation
-                            if (!data.name || data.name.length > 100) {
-                                formStatus.textContent = "Name must be between 1 and 100 characters.";
-                                formStatus.style.color = "red";
-                                return;
-                            }
-                            if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(data.email)) {
-                                formStatus.textContent = "Invalid email address.";
-                                formStatus.style.color = "red";
-                                return;
-                            }
-                            if (data.phone !== "Not provided" && !/^\+?[0-9\s]{7,20}$/.test(data.phone)) {
-                                formStatus.textContent = "Phone must be 7–20 digits, optional +.";
-                                formStatus.style.color = "red";
-                                return;
-                            }
-                            if (data.weight !== "Not provided" && !/^(?:[0-9]+(\.[0-9]{1,2})?\s*)+$/.test(data.weight)) {
-                                formStatus.textContent = "Weight must be one or more numbers with up to 2 decimal places, separated by spaces (e.g., 123.45 or 123.45 678).";
-                                formStatus.style.color = "red";
-                                weightInput.classList.add('custom-invalid');
-                                return;
-                            }
-                            if (!data.departure || data.departure.length > 70) {
-                                formStatus.textContent = "Departure city is required (max 70 chars).";
-                                formStatus.style.color = "red";
-                                return;
-                            }
-                            if (!data.delivery || data.delivery.length > 70) {
-                                formStatus.textContent = "Delivery city is required (max 70 chars).";
-                                formStatus.style.color = "red";
-                                return;
-                            }
-                            if (!["freight", "air", "road"].includes(data.transportation)) {
-                                formStatus.textContent = "Select a valid transportation method.";
-                                formStatus.style.color = "red";
-                                return;
-                            }
-                            if (!data.message || data.message.length > 400) {
-                                formStatus.textContent = "Message must be between 1 and 400 characters.";
-                                formStatus.style.color = "red";
-                                return;
-                            }
+            // Validation
+            if (!data.name || data.name.length > 100) {
+                formStatus.textContent = "Name must be between 1 and 100 characters.";
+                formStatus.style.color = "red";
+                return;
+            }
+            if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(data.email)) {
+                formStatus.textContent = "Invalid email address.";
+                formStatus.style.color = "red";
+                return;
+            }
+            if (data.phone !== "Not provided" && !/^\+?[0-9\s]{7,20}$/.test(data.phone)) {
+                formStatus.textContent = "Phone must be 7–20 digits, optional +.";
+                formStatus.style.color = "red";
+                return;
+            }
+            if (data.weight !== "Not provided" && !/^[0-9]+(\.[0-9]{1,2})?(\s+[0-9]+(\.[0-9]{1,2})?)*$/.test(data.weight)) {
+                formStatus.textContent = "Weight must be one or more numbers with up to 2 decimal places, separated by spaces (e.g., 123.45 or 123.45 678).";
+                formStatus.style.color = "red";
+                weightInput.classList.add('custom-invalid');
+                return;
+            }
+            if (!data.departure || data.departure.length > 70) {
+                formStatus.textContent = "Departure city is required (max 70 chars).";
+                formStatus.style.color = "red";
+                return;
+            }
+            if (!data.delivery || data.delivery.length > 70) {
+                formStatus.textContent = "Delivery city is required (max 70 chars).";
+                formStatus.style.color = "red";
+                return;
+            }
+            if (!["freight", "air", "road"].includes(data.transportation)) {
+                formStatus.textContent = "Select a valid transportation method.";
+                formStatus.style.color = "red";
+                return;
+            }
+            if (!data.message || data.message.length > 400) {
+                formStatus.textContent = "Message must be between 1 and 400 characters.";
+                formStatus.style.color = "red";
+                return;
+            }
 
-                            // Submit to Supabase
-                            const { error } = await supabase.from('messages').insert([data]);
+            // Submit to Supabase
+            const { error } = await supabase.from('messages').insert([data]);
 
-                            if (error) {
-                                throw error;
-                            }
+            if (error) {
+                throw error;
+            }
 
-                            // Success feedback
-                            formStatus.textContent = "Message sent successfully!";
-                            formStatus.style.color = "green";
-                            form.reset();
+            // Success feedback
+            formStatus.textContent = "Message sent successfully!";
+            formStatus.style.color = "green";
+            form.reset();
 
-                        } catch (error) {
-                            console.error("Form submission error:", error);
-                            formStatus.textContent = "Error submitting form: " + error.message;
-                            formStatus.style.color = "red";
-                        }
-                    });
-                </script>
+        } catch (error) {
+            console.error("Form submission error:", error);
+            formStatus.textContent = "Error submitting form: " + error.message;
+            formStatus.style.color = "red";
+        }
+    });
+</script>
 
                 <div class="contact-info">
                     <h3>Get in Touch</h3>
